@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Movie Lists</title>
-</head>
-<body>
-    <h1><a href="/">Movie Lists</a></h1>
+{% extends 'imdb_api/base.html' %}
 
-
-    <div>
-        <table>
-            <tr>
-                <th>Ratings</th>
-                <th>Movie Name</th>
-                <th>Actors</th>
-            </tr>
-            <tr>
-                <th>Stuff</th>
-                <th>Stuff</th>
-                <th>Stuff</th>
-            </tr>
-        </table>
-
-    </div>
-</body>
-</html>
+{% block content %}
+{% for movie in movies %}
+<tr>
+    <td>multiple rating</td>
+    <td>{{ movie.name }}</td>
+    <td>multiple people</td>
+</tr>
+{% endfor %}
+{% endblock %}
