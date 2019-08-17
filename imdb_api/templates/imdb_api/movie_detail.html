@@ -22,4 +22,24 @@
     </tbody>
 </table>
 
+<h3>Ratings</h3><a href="{% url 'rate_new' pk=movie.pk%}" class="top-menu"><i class="large material-icons">add</i></a>
+
+    <table class="highlight">
+    <thead>
+    <tr>
+        <th>Rate</th>
+        <th>Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for rate in ratings %}
+    <tr>
+        <td>{{ rate.rate}}</td>
+        <td>{{ rate.comment }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
 {% endblock %}
