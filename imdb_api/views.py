@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Movie, Actor, Rating
+from .forms import RatingForm
 from django.shortcuts import render, get_object_or_404
 
 def movie_list(request):
@@ -12,4 +13,12 @@ def movie_detail(request, pk):
     return render(request, 'imdb_api/movie_detail.html',
                   {'movie': movie,
                    'actors': actors,
+                   })
+
+def rate_new(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    form = RatingForm()
+    return render(request, 'imdb_api/rate_new.html',
+                  {'form':form,
+                   'movie':movie
                    })
