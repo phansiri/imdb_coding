@@ -1,12 +1,21 @@
 from django import forms
 from .models import Rating
 
-class RatingForm(forms.ModelForm):
+STAR_RATING = [1,2,3,4,5]
 
-    class Meta:
-        model = Rating
-        fields = (
-            'rate',
-            'comment',
-            'movie_id',
-        )
+
+class RatingForm(forms.Form):
+    user_rate = forms.CharField(
+        widget=forms.Select(choices=STAR_RATING),
+    )
+    user_comment = forms.CharField(max_length=300)
+    user_movie = forms.ChoiceField()
+
+
+    # class Meta:
+    #     model = Rating
+    #     fields = [
+    #         'rate',
+    #         'comment',
+    #         'movie_id',
+    #     ]
