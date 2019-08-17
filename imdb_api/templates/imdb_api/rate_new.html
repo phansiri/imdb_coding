@@ -1,7 +1,7 @@
 {% extends 'imdb_api/base.html' %}
 
 {% block content %}
-<h2>New Rating for {{ movie.name }}</h2>
+<h2>New Rating for {{ movie }}</h2>
 <form method="post" class="post-form" action="">{% csrf_token %}
 {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
