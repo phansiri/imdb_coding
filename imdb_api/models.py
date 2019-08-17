@@ -46,4 +46,4 @@ class Rating(models.Model):
     comment = models.TextField()
 
     def __str__(self):
-        return self.rate
+        return str(self.rate)
