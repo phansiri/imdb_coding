@@ -5,6 +5,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 def movie_list(request):
+    query = request.GET.get("q_m")
+    if query:
+        q_list = Actor.objects.filter(movie_id__name__icontains=query)
+        print('@@@@@@@@@@@@@@@@@@@@@@@',q_list)
+
     movies = Movie.objects.all().order_by('name')
     return render(request, 'imdb_api/movie_list.html', {'movies': movies})
 

@@ -11,7 +11,6 @@ from django.db import models
 # Movie table that has a primary key of movie_id and one attribute
 # called name with the type string and a max character length of 255
 class Movie(models.Model):
-    # movie_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
 
     # __str__ method returns a string "movie_id: name"
@@ -24,7 +23,6 @@ class Movie(models.Model):
 # are in a table that has its own id. To finish off, Actor table has two attributes,
 # fname and lname representing only one actor
 class Actor(models.Model):
-    # actor_id = models.AutoField(primary_key=True)
     movie_id = models.ManyToManyField(Movie)
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
@@ -40,7 +38,6 @@ class Actor(models.Model):
 
 
 class Rating(models.Model):
-    # rating_id = models.AutoField(primary_key=True)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rate = models.IntegerField()
     comment = models.TextField()

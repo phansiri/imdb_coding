@@ -1,21 +1,23 @@
 {% extends 'imdb_api/base.html' %}
 
 {% block content %}
+    <h4>Movie Search to return actors</h4>
+    <form action="" method="get">
+        <input type="text" name="q_m" placeholder="Search movies">
+        <input type="submit" value="Search">
+    </form>
 
 <table class="highlight">
     <thead>
     <tr>
-        <th>Ratings</th>
+
 <th>Movie Name</th>
-<th>Actors</th>
 </tr>
 </thead>
 <tbody>
 {% for movie in movies %}
 <tr>
-<td>multiple rating</td>
 <td><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.name }}</a></td>
-<td>multiple people</td>
 </tr>
 {% endfor %}
 </tbody>
