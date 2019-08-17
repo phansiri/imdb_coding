@@ -10,15 +10,17 @@ def movie_list(request):
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     actors = Actor.objects.filter(movie_id=pk)
+    ratings = get_object_or_404(Movie, pk=pk)
     return render(request, 'imdb_api/movie_detail.html',
                   {'movie': movie,
                    'actors': actors,
+                   'ratings': ratings,
                    })
 
 def rate_new(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
     form = RatingForm()
+    movie = Movie.objects.get(id=pk)
     return render(request, 'imdb_api/rate_new.html',
                   {'form':form,
-                   'movie':movie
+                   'movie': movie,
                    })
