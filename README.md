@@ -21,7 +21,8 @@ Build a web API that allows any user to:
 ##Overview of development process
 ###High level checklist
 1. Create Database
-2. Generate Django web framework
+2. Establish github repo
+3. Generate Django web framework
     - [x] connect with db
     - [x] serve up data on the web page
     - [x] allow any user to add rating
@@ -32,27 +33,40 @@ Build a web API that allows any user to:
 ###Detailed thought process
 1. First step after reading the prompt was to create a database that can hold information necessary for the prompt.
 2. Movie, actor, and rating is what I gathered to create the main tables from.
-3. Movie table has (2) attributes of movie_id (primary key) and name
-4. Actor table has (3) attributes of actor_id (primary key), fname, and lname.
-5. Rating table has (4) attributes of rating_id (primary key), movie_id (foreign key), rate, and comment.
+    * Utilizing Django makes generating a database easy in order to allow the developer to focus on the functionality of what is important. However, below is a drawn ERD.
+3. Movie table has (2) attributes of id (primary key) and name.
+4. Actor table has (3) attributes of id (primary key), fname, and lname.
+5. Rating table has (4) attributes of id (primary key), movie_id (foreign key), rate, and comment.
 6. Created joining table for Movie and Actor tables because they have a many to many relationship. One movie can have multiple actors and one actor can star in multiple movies.
 7. The Movie and Rating table has a one to many relationship because one movie can have multiple ratings while one rating can only be for one movie.
 8. Once the database was created through localhost, it was time to create the Django project and app.
-9. Once I go the web app running, I tested the connection through psycopg2 to ensure the database was set up correctly.
+9. Once I go the web app running, I tested the connection through psycopg2 to ensure the database was set up correctly and other admin settings.
 10. Once the connection was established, I created the models (database tables) through Django's language. Below is an Entity Relational Diagram.
+**This was the time I submitted my initial git push to the repo. My thought process on the workflow is as follows: The master branch should not have any commits, develop branch will be the main and staging branch where all other branches stem out from. Each branch that come out of develop will tackle a single feature because getting pushed to the repo. Once there is a pull request, I ensure it is handled from that branch to the develop branch. After a good amount of functionality is completed, then develop branch will merge with master.
+**If you want to verify see [https://github.com/phansiri/imdb_coding/network]()
 ****Add ERD picture
-11. I added some test data that will test functionality of the prompts. (api will come later)
-12. created movie list to showcase movie
-13. created movie detail that will show actors and its ratings
-14. inside movie detail, give the ability to input a rating scale 1-5, add comment, and submit it to the database
+11. I added some test data that will test functionality of the prompts.
+12. created movie list to showcase movie through non-api in order to see the behavior on the frontend through the views.py code.
+13. created movie detail that will show actors and its ratings same as above
+14. inside movie detail, give the ability to input a rating scale 1-5, add comment, and submit it to the database same as above
+15. Once I got it all working, I started on the API section
+16. Django utilizes the Django REST framework which makes creating api easier
+17. I started out with creating a serializer, updating my urls, and then the views. These three py files were heavily edited.
  
  
 ###Answering prompt questions
 1. The endpoint is [/api/v1/movie/](). To interact with it, pass in [?q=name of movie]() at the end of the url and the results of how star in them with return.
-    * for example [/api/v1/movie?q=terminator]() and json object that returns will be the actors (as a bonus, I added other movies that they also star in)
+```
+or example [/api/v1/movie?q=terminator]() and json object that returns will be the actors (as a bonus, I added other movies that they also star in)
+```
 2. The endpoint is [/api/v1/actor/](). To interact with it, pass in [?q=Schwarzenegger]() at the end of the url and the results of how many movies that actor as stared in.
-    * for example [/api/v1/actor?q=schwarzenegger]() and a json object will have a list of movies in it
+```
+for example [/api/v1/actor?q=schwarzenegger]() and a json object will have a list of movies in it
+```
+   
 3. The endpoint is [/api/v1/rate/](). To interact with it, pass in [?rate=<int>&comment=<string>&movie_id=<int>]()
-    * for example [/api/v1/rate/?rate=5&comment=hi&movie_id=3]() and the csrf token is needed in order to be able to post
-    * In the serializers.py, I set the rate variable with a min of 1 and max of 5. All fields are required too.
+```
+for example [/api/v1/rate/?rate=5&comment=hi&movie_id=3]() and the csrf token is needed in order to be able to post
+In the serializers.py, I set the rate variable with a min of 1 and max of 5. All fields are required too.
+```
 4. The endpoint is [/api/v1/rate/<int:rating>](). To interact with it, change the <int:rating> to a number within 1 to 5 and the api will return a json list of all movies and actors that have a star rating greater than what was passed in at the end
