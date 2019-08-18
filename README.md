@@ -33,7 +33,7 @@ Build a web API that allows any user to:
     - [x] allow any user to add rating
     - [x] create api endpoints through Django REST framework
     - [x] create user interaction with api
-    - [ ] clean up code
+    - [x] clean up code
     
 ### Detailed thought process
 1. First step after reading the prompt was to create a database that can hold information necessary for the prompt.
@@ -47,8 +47,9 @@ Build a web API that allows any user to:
 8. Once the database was created through localhost, it was time to create the Django project and app.
 9. Once I go the web app running, I tested the connection through psycopg2 to ensure the database was set up correctly and other admin settings.
 10. Once the connection was established, I created the models (database tables) through Django's language. Below is an Entity Relational Diagram.
-** This was the time I submitted my initial git push to the repo. My thought process on the workflow is as follows: The master branch should not have any commits, develop branch will be the main and staging branch where all other branches stem out from. Each branch that come out of develop will tackle a single feature because getting pushed to the repo. Once there is a pull request, I ensure it is handled from that branch to the develop branch. After a good amount of functionality is completed, then develop branch will merge with master.
-** If you want to verify see [https://github.com/phansiri/imdb_coding/network](https://github.com/phansiri/imdb_coding/network)
+* This was the time I submitted my initial git push to the repo. My thought process on the workflow is as follows: The master branch should not have any commits, develop branch will be the main and staging branch where all other branches stem out from. Each branch that come out of develop will tackle a single feature because getting pushed to the repo. Once there is a pull request, I ensure it is handled from that branch to the develop branch. After a good amount of functionality is completed, then develop branch will merge with master.
+* If you want to verify see [https://github.com/phansiri/imdb_coding/network](https://github.com/phansiri/imdb_coding/network)
+* Models are broken down to at least 3rd Normal form so that one piece of information is in one cell.
 ![Entity Relationship Diagram](/screenshots/imdb_db_erd.PNG)
 11. I added some test data that will test functionality of the prompts.
 12. created movie list to showcase movie through non-api in order to see the behavior on the frontend through the views.py code.
@@ -57,32 +58,38 @@ Build a web API that allows any user to:
 15. Once I got it all working, I started on the API section
 16. Django utilizes the Django REST framework which makes creating api easier
 17. I started out with creating a serializer, updating my urls, and then the views. These three py files were heavily edited.
+18. All the tests are mainly in the test.py file
  
  
 ### Answering prompt questions
-Number 1. The endpoint is [/api/v1/movie/](). To interact with it, pass in [?q=name of movie]() at the end of the url and the results of how star in them with return.
-```
-or example [/api/v1/movie?q=terminator]() and json object that returns will be the actors (as a bonus, I added other movies that they also star in)
-```
+Number 1. The endpoint is [/api/v1/movie/]. To interact with it, pass in [?q=name of movie] at the end of the url and the results of how star in them with return.
+
+For example /api/v1/movie?q=terminator and json object that returns will be the actors (as a bonus, I added other movies that they also star in)
 ![IMDB api movie list](/screenshots/imdb_api_movie_list.PNG)
 ![IMDB api movie list search result](/screenshots/imdb_api_movie_list-search-result.PNG)
 
-Number 2. The endpoint is [/api/v1/actor/](). To interact with it, pass in [?q=Schwarzenegger]() at the end of the url and the results of how many movies that actor as stared in.
-```
-for example [/api/v1/actor?q=schwarzenegger]() and a json object will have a list of movies in it
-```
+Number 2. The endpoint is [/api/v1/actor/]. To interact with it, pass in [?q=Schwarzenegger] at the end of the url and the results of how many movies that actor as stared in.
+
+For example /api/v1/actor?q=schwarzenegger and a json object will have a list of movies in it
 ![IMDB api actor list](/screenshots/imdb_api_actor_list.PNG)
 ![IMDB api actor list search result](/screenshots/imdb_api_actor_list-search-result.PNG)
 
-Number 3. The endpoint is [/api/v1/rate/](). To interact with it, pass in [?rate=<int>&comment=<string>&movie_id=<int>]()
-```
-for example [/api/v1/rate/?rate=5&comment=hi&movie_id=3]() and the csrf token is needed in order to be able to post
+Number 3. The endpoint is [/api/v1/rate/]. To interact with it, pass in [?rate=int&comment=string&movie_id=int]
+
+For example /api/v1/rate/?rate=5&comment=hi&movie_id=3 and the csrf token is needed in order to be able to post
 In the serializers.py, I set the rate variable with a min of 1 and max of 5. All fields are required too.
-```
+However, below is the interactive way Django lets the user add their own. 
+
 ![IMDB api rate list top](/screenshots/imdb_api_rate_list_top.PNG)
 ![IMDB api rate list bottom](/screenshots/imdb_api_rate_list_bottom.PNG)
-Number 4. The endpoint is [/api/v1/rate/<int:rating>](). To interact with it, change the <int:rating> to a number within 1 to 5 and the api will return a json list of all movies and actors that have a star rating greater than what was passed in at the end
-![IMDB api rate list search result](/screenshots/imdb_api_rate_list_search_result.PNG)
+
+#### Handling validation for rate on the backend
+![IMDB api rate list create rate 6 bad request](/screenshots/imdb_rate_list_create_rate_6_bad_request.PNG)
+![IMDB api rate list create rate -1 bad request](/screenshots/imdb_rate_list_create_rate_-1_bad_request.PNG)
+![IMDB api rate list create rate successful created](/screenshots/imdb_rate_list_create_rate_created.PNG)
+
+Number 4. The endpoint is [/api/v1/rate/int:rating](). To interact with it, change the int:rating to a number within 1 to 5 and the api will return a json list of all movies and actors that have a star rating greater than what was passed in at the end
+![IMDB api rate list search result](/screenshots/imdb_api_rate_list_search_result_v2.PNG)
 
 ### Swagger API view
 ![IMDB Swagger API view](/screenshots/imdb-swagger-api-view.PNG)
