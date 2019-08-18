@@ -1,8 +1,6 @@
-from django.test import TestCase
-from rest_framework.test import APITestCase, APIRequestFactory, APIClient
-from rest_framework.authtoken.models import Token
-from .views import api_movie_list
-from .models import Rating, Movie, Actor
+from rest_framework.test import APITestCase, APIClient
+
+from .models import Rating, Movie
 
 # Test case that creates an movie object and rate it to ensure
 # behavior is correct

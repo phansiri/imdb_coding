@@ -2,7 +2,11 @@ from rest_framework import serializers
 from .models import Movie, Actor, Rating
 
 # This allows the Actor model to be rendered as JSON objects
+# movie_id variable holds a string related field of the id
+# the string form is found as a method on the models.py for Actor
+# which will return both fname and lname
 class ActorSerializer(serializers.ModelSerializer):
+    movie_id = serializers.StringRelatedField(many=True)
     class Meta:
         model = Actor
         fields = '__all__'
