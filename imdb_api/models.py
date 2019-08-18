@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework.reverse import reverse as api_reverse
 
 # Relational Database Tables in the form of classes. Django will understand
 # and create the the table in the postgresql database that is in
@@ -30,6 +31,9 @@ class Actor(models.Model):
     # __str__ method returns a string "fname lname"
     def __str__(self):
         return '{} {}'.format(self.fname, self.lname)
+
+    # def get_api_url(self):
+    #     return api_reverse("MovieList", kwargs={'pk': self.pk})
 
 # Rating table has a primary key of rating_id, it has a one to many relationship
 # with the Movie table because one movie can have many ratings while one rating
