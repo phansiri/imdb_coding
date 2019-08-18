@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework.reverse import reverse as api_reverse
 
 # Relational Database Tables in the form of classes. Django will understand
 # and create the the table in the postgresql database that is in
@@ -11,7 +12,6 @@ from django.db import models
 # Movie table that has a primary key of movie_id and one attribute
 # called name with the type string and a max character length of 255
 class Movie(models.Model):
-    # movie_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
 
     # __str__ method returns a string "movie_id: name"
@@ -24,7 +24,6 @@ class Movie(models.Model):
 # are in a table that has its own id. To finish off, Actor table has two attributes,
 # fname and lname representing only one actor
 class Actor(models.Model):
-    # actor_id = models.AutoField(primary_key=True)
     movie_id = models.ManyToManyField(Movie)
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
@@ -33,6 +32,9 @@ class Actor(models.Model):
     def __str__(self):
         return '{} {}'.format(self.fname, self.lname)
 
+    # def get_api_url(self):
+    #     return api_reverse("MovieList", kwargs={'pk': self.pk})
+
 # Rating table has a primary key of rating_id, it has a one to many relationship
 # with the Movie table because one movie can have many ratings while one rating
 # can be for one movie. The ForeignKey method creates a strong relationship with Movie table.
@@ -40,7 +42,6 @@ class Actor(models.Model):
 
 
 class Rating(models.Model):
-    # rating_id = models.AutoField(primary_key=True)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rate = models.IntegerField()
     comment = models.TextField()
