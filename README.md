@@ -58,6 +58,7 @@ Build a web API that allows any user to:
 15. Once I got it all working, I started on the API section
 16. Django utilizes the Django REST framework which makes creating api easier
 17. I started out with creating a serializer, updating my urls, and then the views. These three py files were heavily edited.
+18. All the tests are mainly in the test.py file
  
  
 ### Answering prompt questions
