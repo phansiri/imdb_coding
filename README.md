@@ -48,7 +48,7 @@ Build a web API that allows any user to:
 9. Once I go the web app running, I tested the connection through psycopg2 to ensure the database was set up correctly and other admin settings.
 10. Once the connection was established, I created the models (database tables) through Django's language. Below is an Entity Relational Diagram.
 ** This was the time I submitted my initial git push to the repo. My thought process on the workflow is as follows: The master branch should not have any commits, develop branch will be the main and staging branch where all other branches stem out from. Each branch that come out of develop will tackle a single feature because getting pushed to the repo. Once there is a pull request, I ensure it is handled from that branch to the develop branch. After a good amount of functionality is completed, then develop branch will merge with master.
-** If you want to verify see [https://github.com/phansiri/imdb_coding/network]()
+** If you want to verify see [https://github.com/phansiri/imdb_coding/network](https://github.com/phansiri/imdb_coding/network)
 ![Entity Relationship Diagram](/screenshots/imdb_db_erd.PNG)
 11. I added some test data that will test functionality of the prompts.
 12. created movie list to showcase movie through non-api in order to see the behavior on the frontend through the views.py code.
