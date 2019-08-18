@@ -14,6 +14,9 @@ from rest_framework.reverse import reverse as api_reverse
 class Movie(models.Model):
     name = models.CharField(max_length=255)
 
+    class Meta:
+        ordering = ['name']
+
     # __str__ method returns a string "movie_id: name"
     def __str__(self):
         return self.name

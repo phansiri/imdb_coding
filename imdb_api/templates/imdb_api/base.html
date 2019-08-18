@@ -9,8 +9,16 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="center-align"><a href="/">Movies</a></h1><h2><a href="/admin">Admin</a></h2>
-
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Mon Cala Coding Challage</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/api/v1/movie">Movie API</a></li>
+                <li><a href="/api/v1/actor/">Actor API</a></li>
+                <li><a href="/api/v1/rate">Rate and Comment</a></li>
+            </ul>
+        </div>
+    </nav>
         {% block content %}
         {% endblock %}
 
