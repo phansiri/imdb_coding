@@ -24,9 +24,10 @@ Build a web API that allows any user to:
 2. Generate Django web framework
     - [x] connect with db
     - [x] serve up data on the web page
-    - [ ] allow any user to add rating
-    - [ ] create api endpoints through Django REST framework
-    - [ ] create user interaction with api
+    - [x] allow any user to add rating
+    - [x] create api endpoints through Django REST framework
+    - [x] create user interaction with api
+    - [ ] clean up code
     
 ###Detailed thought process
 1. First step after reading the prompt was to create a database that can hold information necessary for the prompt.
@@ -45,3 +46,13 @@ Build a web API that allows any user to:
 13. created movie detail that will show actors and its ratings
 14. inside movie detail, give the ability to input a rating scale 1-5, add comment, and submit it to the database
  
+ 
+###Answering prompt questions
+1. The endpoint is [/api/v1/movie/](). To interact with it, pass in [?q=name of movie]() at the end of the url and the results of how star in them with return.
+    * for example [/api/v1/movie?q=terminator]() and json object that returns will be the actors (as a bonus, I added other movies that they also star in)
+2. The endpoint is [/api/v1/actor/](). To interact with it, pass in [?q=Schwarzenegger]() at the end of the url and the results of how many movies that actor as stared in.
+    * for example [/api/v1/actor?q=schwarzenegger]() and a json object will have a list of movies in it
+3. The endpoint is [/api/v1/rate/](). To interact with it, pass in [?rate=<int>&comment=<string>&movie_id=<int>]()
+    * for example [/api/v1/rate/?rate=5&comment=hi&movie_id=3]() and the csrf token is needed in order to be able to post
+    * In the serializers.py, I set the rate variable with a min of 1 and max of 5. All fields are required too.
+4. The endpoint is [/api/v1/rate/<int:rating>](). To interact with it, change the <int:rating> to a number within 1 to 5 and the api will return a json list of all movies and actors that have a star rating greater than what was passed in at the end
