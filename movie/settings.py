@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # my apps that are installed to use throughout django
     'imdb_api',
     'rest_framework',
     'django_filters',

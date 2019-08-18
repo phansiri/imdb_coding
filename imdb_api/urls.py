@@ -1,12 +1,13 @@
-from django.urls import path
 from . import views
+from django.urls import path
 from rest_framework_swagger.views import get_swagger_view
-
 from rest_framework.urlpatterns import format_suffix_patterns
 
 schema_view = get_swagger_view(title='IMDB API')
 
+# URL in a list
 urlpatterns = [
+
     # Frontend view
     path('', views.movie_list, name='movie_list'),
     path('movie/<int:pk>/', views.movie_detail, name='movie_detail'),
