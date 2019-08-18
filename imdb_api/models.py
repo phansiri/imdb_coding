@@ -35,9 +35,6 @@ class Actor(models.Model):
     def __str__(self):
         return '{} {}'.format(self.fname, self.lname)
 
-    # def get_api_url(self):
-    #     return api_reverse("MovieList", kwargs={'pk': self.pk})
-
 # Rating table has a primary key of rating_id, it has a one to many relationship
 # with the Movie table because one movie can have many ratings while one rating
 # can be for one movie. The ForeignKey method creates a strong relationship with Movie table.
