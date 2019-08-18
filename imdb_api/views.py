@@ -1,22 +1,19 @@
-from django.shortcuts import render
 from .models import Movie, Actor, Rating
 from .forms import RatingForm
 from django.shortcuts import render, get_object_or_404, redirect
-
-from rest_framework import viewsets
 from .serializers import MovieSerializer, ActorSerializer, RatingSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import generics, mixins
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
+from rest_framework import viewsets
 from django_filters import FilterSet
 from django_filters import rest_framework as filters
-
+from rest_framework.reverse import reverse
+from rest_framework.views import APIView
 # API VIEWS
 
 # good
@@ -51,29 +48,9 @@ def api_actor_list(request):
             serializer = MovieSerializer(new_search, many=True, context={'request': request})
         return Response(serializer.data)
 
-
-# POST is not complete
-# @api_view(['GET','POST', 'DELETE'])
-# def api_rates_detail(request, pk, format=None):
-#     try:
-#         queryset = Rating.objects.filter(movie_id=pk)
-#     except Rating.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-#         serializer = RatingSerializer(queryset, many=True, context={'request': request})
-#         return Response(serializer.data)
-#     elif request.method == 'POST':
-#         serializer = RatingSerializer(queryset, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     elif request.method == 'DELETE':
-#         queryset.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-
 class RateListCreateView(generics.ListCreateAPIView):
     serializer_class = RatingSerializer
+
     def get_queryset(self):
         queryset = Rating.objects.all()
         movie_id = self.request.query_params.get('movie_id', None)
@@ -85,18 +62,6 @@ class RateListCreateView(generics.ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
 
-
-# @api_view(['GET'])
-# def api_rating_list(request, format=None):
-#     try:
-#         queryset = Rating.objects.all()
-#     except Rating.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-#         serializer = RatingSerializer(queryset, many=True, context={'request': request})
-#         return Response(serializer.data)
-
-# functionality is slightly off
 @api_view(['GET'])
 def api_rating_list_search(request, pk, format=None):
     try:
@@ -116,13 +81,13 @@ class RateSearch(generics.ListAPIView):
 
 
 
+# ###################################################################################
 
 # working on search function
 def movie_list(request):
     query = request.GET.get("q_m")
     if query:
         q_list = Actor.objects.filter(movie_id__name__icontains=query)
-        print('@@@@@@@@@@@@@@@@@@@@@@@',q_list)
 
     movies = Movie.objects.all().order_by('name')
     return render(request, 'imdb_api/movie_list.html', {'movies': movies})
