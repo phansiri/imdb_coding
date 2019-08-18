@@ -89,7 +89,7 @@ However, below is the interactive way Django lets the user add their own.
 ![IMDB api rate list create rate successful created](/screenshots/imdb_rate_list_create_rate_created.PNG)
 
 Number 4. The endpoint is [/api/v1/rate/int:rating](). To interact with it, change the int:rating to a number within 1 to 5 and the api will return a json list of all movies and actors that have a star rating greater than what was passed in at the end
-![IMDB api rate list search result](/screenshots/imdb_api_rate_list_search_result.PNG)
+![IMDB api rate list search result](/screenshots/imdb_api_rate_list_search_result_v2.PNG)
 
 ### Swagger API view
 ![IMDB Swagger API view](/screenshots/imdb-swagger-api-view.PNG)
