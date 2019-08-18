@@ -16,8 +16,6 @@ class RatingSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Rating.objects.create(**validated_data)
 
-
-
 class MovieSerializer(serializers.ModelSerializer):
     actors = ActorSerializer(many=True, read_only=True)
     class Meta:
