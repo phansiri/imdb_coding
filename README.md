@@ -72,7 +72,7 @@ Number 2. The endpoint is [/api/v1/actor/](). To interact with it, pass in [?q=S
 for example [/api/v1/actor?q=schwarzenegger]() and a json object will have a list of movies in it
 ```
 ![IMDB api actor list](/screenshots/imdb_api_actor_list.PNG)
-![IMDB api actor list search result](/screenshots/imdb_api_movie_actor-search-result.PNG)
+![IMDB api actor list search result](/screenshots/imdb_api_actor_list-search-result.PNG)
 
 Number 3. The endpoint is [/api/v1/rate/](). To interact with it, pass in [?rate=<int>&comment=<string>&movie_id=<int>]()
 ```
