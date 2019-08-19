@@ -41,7 +41,7 @@ git clone https://github.com/phansiri/imdb_coding.git
 In the same root directory, install the virtual environment, update pip,  activate it, and pip install the requirements
 ```bash
 cd imdb_coding
-ptyhon3 -m venv venv
+pyhon -m venv venv
 . venv/Scripts/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
@@ -51,9 +51,9 @@ Go into the settings.py and update the database dictionary to ensure key/value p
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'imdb_db',
-        'USER': 'user_imdb',
-        'PASSWORD': '1234',
+        'NAME': 'imdb_db',        # change to an empty database you created on your local postgres
+        'USER': 'user_imdb',      # change this to a local postgres user that has access to the database
+        'PASSWORD': '1234',       # change this to the password of the local postgres user
         'HOST': '127.0.0.1',
         'PORT': '5432'
     }
