@@ -23,6 +23,52 @@ Build a web API that allows any user to:
 * Postman to test api functionality
 * Pycharm IDE
 
+## Geetting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+### Prerequisites
+What things you need to have prior to installing the project
+```
+Python 3
+Virtual Environment
+Blank Postresql database - username, pass, and database name
+```
+### Installing
+A step by step series of examples on how to get it a development env running - please be mindful of what OS you are using
+Git clone into a blank directory
+```bash
+git clone https://github.com/phansiri/imdb_coding.git
+```
+In the same root directory, install the virtual environment, update pip,  activate it, and pip install the requirements
+```bash
+cd imdb_coding
+pyhon -m venv venv
+. venv/Scripts/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+Go into the settings.py and update the database dictionary to ensure key/value pair matches with what you are using. In this case, postgresql. Ensure the name, user, and pass matches what is running on your local postgresql server.
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'imdb_db',        # change to an empty database you created on your local postgres
+        'USER': 'user_imdb',      # change this to a local postgres user that has access to the database
+        'PASSWORD': '1234',       # change this to the password of the local postgres user
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
+}
+```
+Once that is set up, its time to migrate data from django to the database and run server! Ensure the follow the instructions to create the super user.
+```bash
+python manage.py migrate
+python manage.py makemigrations imdb_api
+python manage.py migrate imdb_api
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+
 ## Overview of development process
 ### High level checklist
 1. Create Database

@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     # my apps that are installed to use throughout django
     'imdb_api',
     'rest_framework',
-    'django_filters',
     'rest_framework_swagger',
 ]
 
@@ -94,7 +93,6 @@ DATABASES = {
 
 # Added functionality for the rest framework
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
